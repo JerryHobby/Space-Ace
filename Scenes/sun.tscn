@@ -1,0 +1,185 @@
+[gd_scene load_steps=22 format=3 uid="uid://mimrcpg1n0sc"]
+
+[ext_resource type="Texture2D" uid="uid://b2a6wlje8qgxs" path="res://assets/misc/sun.png" id="1_c5xm4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bcax"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(0, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c43fi"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(330, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qs7je"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(660, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4cix"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(990, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nglr7"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(1320, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuf05"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(1650, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgtin"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(1980, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30weh"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(2310, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0pkl"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(2640, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff6h3"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(2970, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spkq5"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(3300, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv2qr"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(3630, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe7aj"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(3960, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mulgk"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(4290, 0, 330, 330)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0iqp"]
+atlas = ExtResource("1_c5xm4")
+region = Rect2(4620, 0, 330, 330)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wqnft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bcax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c43fi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qs7je")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4cix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nglr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuf05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgtin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30weh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0pkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ff6h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spkq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv2qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xe7aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mulgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0iqp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_pyv4d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_obnqc"]
+resource_name = "rotate"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.26573]
+}
+
+[sub_resource type="Animation" id="Animation_qvrhd"]
+resource_name = "pulse"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.823529, 0.823529, 0.823529, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0xo7"]
+_data = {
+"RESET": SubResource("Animation_pyv4d"),
+"pulse": SubResource("Animation_qvrhd"),
+"rotate": SubResource("Animation_obnqc")
+}
+
+[node name="Sun" type="AnimatedSprite2D"]
+modulate = Color(0.930743, 0.930743, 0.930743, 1)
+sprite_frames = SubResource("SpriteFrames_wqnft")
+autoplay = "default"
+frame = 3
+frame_progress = 0.0306713
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f0xo7")
+}
+autoplay = "pulse"

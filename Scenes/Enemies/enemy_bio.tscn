@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch1s0m8qe11gv"]
+
+[ext_resource type="PackedScene" uid="uid://by73ddsyhacy5" path="res://Scenes/Enemies/enemy_basic.tscn" id="1_5020a"]
+[ext_resource type="PackedScene" uid="uid://dgkj0h4vn4p1v" path="res://Scenes/Bullets/enemy_bullet.tscn" id="2_1v0fw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8t4d2"]
+radius = 19.0
+height = 50.0
+
+[node name="EnemyBio" instance=ExtResource("1_5020a")]
+scale = Vector2(0.6, 0.6)
+shoots = true
+bullet_scene = ExtResource("2_1v0fw")
+bullet_damage = 5
+bullet_speed = 300.0
+bullet_direction = Vector2(2.08165e-12, 1)
+bullet_wait_time = 2.0
+bullet_wait_time_var = 0.5
+gun_offset = 30.0
+waves = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_8t4d2")

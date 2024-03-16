@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://bmt318tmus1h1"]
+
+[ext_resource type="Texture2D" uid="uid://cr411gj0du4h7" path="res://assets/ships/ships_human_1.png" id="1_boqmn"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_q3ssx"]
+[ext_resource type="PackedScene" uid="uid://mrtip63lfj5c" path="res://Scenes/Bullets/player_bullet.tscn" id="2_14ab8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxpqv"]
+
+[sub_resource type="Animation" id="Animation_qnfje"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sbav1"]
+resource_name = "fly"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_w7cjm"]
+resource_name = "turn"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ko8mb"]
+_data = {
+"RESET": SubResource("Animation_qnfje"),
+"fly": SubResource("Animation_sbav1"),
+"turn": SubResource("Animation_w7cjm")
+}
+
+[node name="Player" type="Area2D" groups=["player"]]
+collision_mask = 3
+script = ExtResource("1_q3ssx")
+bullet_scene = ExtResource("2_14ab8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_boqmn")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.44, 1.44)
+shape = SubResource("CircleShape2D_gxpqv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ko8mb")
+}
+autoplay = "fly"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

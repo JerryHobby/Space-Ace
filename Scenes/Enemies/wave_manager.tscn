@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://bypyjigiqrbnq"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/wave_manager.gd" id="1_rqqlp"]
+
+[sub_resource type="Curve2D" id="Curve2D_4kid4"]
+_data = {
+"points": PackedVector2Array(202.751, 192.135, -202.751, -192.135, 1393, 217, 1.35122, -189.091, -1.35122, 189.091, 15, 198, -1.67674, 218.271, 1.67674, -218.271, 1274, 221, -3.18456, -196.381, 3.18456, 196.381, 15, 401, 4.24609, 193.197, -4.24609, -193.197, 1270, 407, 184.922, -190.582, -184.922, 190.582, -98, 212)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_60fm5"]
+_data = {
+"points": PackedVector2Array(202.751, 192.135, -202.751, -192.135, 1393, 217, 1.35122, -189.091, -1.35122, 189.091, 15, 198, -1.67674, 218.271, 1.67674, -218.271, 1274, 221, -3.18456, -196.381, 3.18456, 196.381, 15, 401, 4.24609, 193.197, -4.24609, -193.197, 1270, 407, 184.922, -190.582, -184.922, 190.582, -98, 212)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_i5xhd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -139, 141.912, -1.06152, -97.66, 1.06152, 97.66, 1266, 213, -3.18456, -130.567, 3.18456, 130.567, -14, 333, -5.30761, -149.675, 5.30761, 149.675, 1268, 421, -4.24609, -113.583, 4.24609, 113.583, -18, 533, -10.6152, -7.43065, 10.6152, 7.43065, 1364, 622)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_vc3qp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -135, 187, -145.428, 0, 145.428, 0, 141, 109.356, -130.567, 1.06152, 130.567, -1.06152, 488, 199, -139.059, -1.06152, 139.059, 1.06152, 853, 107, -125.26, -4.24609, 125.26, 4.24609, 1164, 206, 0, 0, 0, 0, 1386, 120)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_4miw7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -87, 123, 100, 0.561948, -100, -0.561948, 1440, 124)
+}
+point_count = 2
+
+[node name="WaveManager" type="Node2D"]
+script = ExtResource("1_rqqlp")
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Zippers" type="Node2D" parent="Paths"]
+
+[node name="Path2D1" type="Path2D" parent="Paths/Zippers"]
+position = Vector2(46, 59)
+curve = SubResource("Curve2D_4kid4")
+
+[node name="Path2D2" type="Path2D" parent="Paths/Zippers"]
+position = Vector2(1322, 61)
+scale = Vector2(-1, 1)
+curve = SubResource("Curve2D_60fm5")
+
+[node name="Biomechs" type="Node2D" parent="Paths"]
+
+[node name="Path2D1" type="Path2D" parent="Paths/Biomechs"]
+position = Vector2(72, -122)
+scale = Vector2(1, 1.36)
+curve = SubResource("Curve2D_i5xhd")
+
+[node name="Bombers" type="Node2D" parent="Paths"]
+
+[node name="Path2D1" type="Path2D" parent="Paths/Bombers"]
+position = Vector2(57, -78)
+curve = SubResource("Curve2D_vc3qp")
+
+[node name="Path2D2" type="Path2D" parent="Paths/Bombers"]
+position = Vector2(30, 30)
+curve = SubResource("Curve2D_4miw7")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 12.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
