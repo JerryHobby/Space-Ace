@@ -11,6 +11,8 @@ extends PathFollow2D
 @export var gun_offset:float = 40
 @export var waves = 4
 
+const BOOM_DELAY:float = 0.1
+
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var laser_timer = $LaserTimer
 @onready var booms = $Booms
@@ -83,14 +85,14 @@ func die() -> void:
 	if _dead:
 		return
 	_dead = true
-	set_process(true)
-	make_booms()
+	set_process(false)
+	await make_booms()
 	queue_free()
 
 func make_booms() -> void:
 	for b in booms.get_children():
+		await get_tree().create_timer(BOOM_DELAY).timeout
 		ObjectMaker.create_boom(b.global_position, self)
-
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
@@ -108,5 +110,8 @@ func _on_area_2d_area_entered(area):
 
 
 func _on_health_bar_died():
+	var chance = randf_range(0, 1)
+	if chance <= GameData.POWERUP_CHANCE:
+		ObjectMaker.create_powerup_type(global_position, GameData.POWERUP_TYPE.HEALTH)
 	die()
 

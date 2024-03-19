@@ -5,8 +5,8 @@ const POWER_UP_DEPLOY = preload("res://assets/sounds/powerup/power_up_deploy.wav
 
 
 const POWER_UP_SOUNDS = {
-	GameData.POWERUP_TYPE.HEALTH: preload("res://assets/sounds/powerup/health_16.wav"),
-	GameData.POWERUP_TYPE.SHIELD: preload("res://assets/sounds/powerup/shield_18.wav")
+	GameData.POWERUP_TYPE.HEALTH: preload("res://assets/sounds/powerup/8-bit-powerup-6768.mp3"),
+	GameData.POWERUP_TYPE.SHIELD: preload("res://assets/sounds/powerup/8-bit-powerup-6768.mp3")
 }
 
 const BUTTON_SOUND = preload("res://assets/sounds/misc/click-21156.mp3")
@@ -40,6 +40,7 @@ func get_random_sound_from_list(sound_list: Array):
 func play_sound(audio:AudioStreamPlayer2D):
 	if GameManager.sounds():
 		audio.play()
+
 
 func button_click(audio:AudioStreamPlayer2D):
 	audio.stream = BUTTON_SOUND

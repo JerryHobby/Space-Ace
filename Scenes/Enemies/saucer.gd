@@ -7,9 +7,7 @@ extends PathFollow2D
 const SPEED:float = 0.05
 const SHOOT_PROGRESS:float = 0.02
 const FIRE_OFFSETS = [0.25, 0.5, 0.75]
-
-
-var powerup_scene = preload("res://Scenes/power_up.tscn")
+const BOOM_DELAY:float = 0.10
 
 var _missile_scene:PackedScene = preload("res://Scenes/Bullets/homing_missile.tscn")
 var _shooting:bool = false
@@ -64,24 +62,20 @@ func die() -> void:
 	if _dead:
 		return
 	_dead = true
-	set_process(true)
+	set_process(false)
 	make_powerup()
-	make_booms()
+	await make_booms()
 	queue_free()
 
 func make_powerup() -> void:
-	var powerup = powerup_scene.instantiate()
-
-	powerup.global_position = global_position
-	get_tree().root.add_child(powerup)
-	
-	var pu = GameData.POWERUP_TYPE.values().pick_random()
-	powerup.set_powerup_type(pu)
+	#ObjectMaker.create_powerup(global_position)
+	ObjectMaker.create_powerup_type(global_position, GameData.POWERUP_TYPE.SHIELD)
 
 
 func make_booms() -> void:
 	for b in booms.get_children():
 		ObjectMaker.create_boom(b.global_position, self)
+		await get_tree().create_timer(BOOM_DELAY).timeout
 
 
 func _on_health_bar_died():

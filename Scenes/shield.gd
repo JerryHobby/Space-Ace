@@ -21,3 +21,7 @@ func _on_area_entered(area):
 
 func _on_health_bar_died():
 	queue_free()
+
+
+func _on_timer_timeout():
+	queue_free() # Replace with function body.

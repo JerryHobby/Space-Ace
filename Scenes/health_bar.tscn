@@ -7,6 +7,8 @@
 [node name="HealthBar" type="TextureProgressBar"]
 offset_right = 40.0
 offset_bottom = 3.0
+pivot_offset = Vector2(20, 2.08165e-12)
+size_flags_horizontal = 4
 value = 100.0
 nine_patch_stretch = true
 texture_under = ExtResource("1_52sno")

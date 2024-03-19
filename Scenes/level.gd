@@ -23,7 +23,8 @@ func _process(delta):
 
 	if Input.is_action_pressed("shoot"):
 		pass
-		
+
+
 func play_music():
 	if GameManager.music():
 		music.play()

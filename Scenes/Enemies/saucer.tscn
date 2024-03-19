@@ -139,7 +139,7 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-rotation = 6.11274
+rotation = 1.65125
 texture = ExtResource("1_iwbq2")
 offset = Vector2(2.08165e-12, 3)
 hframes = 7

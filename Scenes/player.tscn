@@ -112,5 +112,7 @@ position = Vector2(-14, 6)
 
 [node name="Marker2D7" type="Marker2D" parent="Booms"]
 
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="died" from="HealthBar" to="." method="_on_health_bar_died"]

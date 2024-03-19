@@ -5,6 +5,7 @@ class_name Player
 @onready var sprite_2d = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var health_bar = $HealthBar
+@onready var sound = $sound
 
 @export var speed:float = 250.0
 @export var bullet_scene:PackedScene
@@ -97,22 +98,23 @@ func _on_area_entered(area):
 		return
 
 	var damage = 0
-	match area.collision_layer:
-		2:
-			print("Hit enemy")
-			damage = 100
-			ObjectMaker.create_boom(global_position, self)
-		8:
-			print("Hit by bullet/bomb")
-			damage = 10
-		16:
-			print("Hit by missile")
-			damage = 25
-		_:
-			print("Unknown hit from: ", area.collision_layer)
-			damage = 10
 
-	var net_position:Vector2 = global_position - self.global_position
+	if area.collision_layer & GameData.LAYER_ENEMY:
+		print("Hit enemy")
+		damage = 100
+		ObjectMaker.create_boom(global_position, self)
+		
+	elif area.collision_layer & GameData.LAYER_ENEMY_BULLET:
+		print("Hit by bullet")
+		damage = 10
+	
+	elif area.collision_layer & GameData.LAYER_HOMING_MISSILE:
+		print("Hit by missile")
+		damage = 25
+	else:
+		print("Unrecognized collision")
+		pause()
+
 	health_bar.take_damage(damage)
 
 
@@ -126,11 +128,15 @@ func add_shield():
 	add_child(_shield)
 
 
-func on_powerup_hit(power_up:GameData.POWERUP_TYPE) -> void:
-	if power_up == GameData.POWERUP_TYPE.HEALTH:
+func on_powerup_hit(powerup:GameData.POWERUP_TYPE) -> void:
+	SoundManager.play_power_up_sound(powerup, sound)
+	
+	if powerup == GameData.POWERUP_TYPE.HEALTH:
+		print("Powerup: HEALTH")
 		health_bar.set_full_health()
 		
-	if power_up == GameData.POWERUP_TYPE.SHIELD:
+	if powerup == GameData.POWERUP_TYPE.SHIELD:
+		print("Powerup: SHIELD")
 		add_shield()
 
 
