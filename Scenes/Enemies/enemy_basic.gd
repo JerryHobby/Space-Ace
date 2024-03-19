@@ -10,9 +10,12 @@ extends PathFollow2D
 @export var bullet_wait_time_var: float = 0.05
 @export var gun_offset:float = 40
 @export var waves = 4
+
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var laser_timer = $LaserTimer
 @onready var booms = $Booms
+@onready var health_bar = $HealthBar
+
 
 var _player_ref:Player
 var _speed:float = 0.0
@@ -76,6 +79,20 @@ func _on_laser_timer_timeout():
 	shoot()
 
 
+func die() -> void:
+	if _dead:
+		return
+	_dead = true
+	set_process(true)
+	make_booms()
+	queue_free()
+
+func make_booms() -> void:
+	for b in booms.get_children():
+		ObjectMaker.create_boom(b.global_position, self)
+
+
+
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	if shoots:
 		start_shoot_timer()
@@ -87,4 +104,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_area_2d_area_entered(area):
-	pass
+	health_bar.take_damage(20)
+
+
+func _on_health_bar_died():
+	die()
+

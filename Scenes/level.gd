@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var music = $music
 
+@onready var power_up = $PowerUp
+@onready var power_up_2 = $PowerUp2
 
 func _ready():
 	if GameManager.music():

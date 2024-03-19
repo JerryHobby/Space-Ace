@@ -23,10 +23,11 @@ func _process(delta):
 
 
 func blow_up(area:Node2D) -> void:
-	var net_position:Vector2 = global_position - area.global_position
-	ObjectMaker.create_explosion(net_position, area)
-	set_process(false)
+	if area.is_in_group(GameData.GROUP_HOMING_MISSILE) == false:
+		var net_position:Vector2 = global_position - area.global_position
+		ObjectMaker.create_explosion(net_position, area)
 
+	set_process(false)
 	queue_free()
 
 

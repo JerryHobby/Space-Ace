@@ -17,9 +17,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SignalManager="*res://Singletons/SignalManager.gd"
 GameData="*res://Singletons/GameData.gd"
 SoundManager="*res://Singletons/SoundManager.gd"
+SignalManager="*res://Singletons/SignalManager.gd"
 GameManager="*res://Singletons/GameManager.gd"
 ObjectMaker="*res://Singletons/ObjectMaker.gd"
 
@@ -84,6 +84,8 @@ sounds={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="player bullet"
+2d_physics/layer_4="enemy bullet"
+2d_physics/layer_5="homing missile"
 
 [rendering]
 

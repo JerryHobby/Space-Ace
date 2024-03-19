@@ -4,6 +4,7 @@ enum ENEMY_TYPE { ZIPPER, BIO, BOMBER }
 enum POWERUP_TYPE { HEALTH, SHIELD }
 
 const GROUP_PLAYER:String = "player"
+const GROUP_HOMING_MISSILE:String = "homing missile"
 
 const POWER_UPS = {
 	POWERUP_TYPE.HEALTH: preload("res://assets/misc/powerupGreen_bolt.png"),

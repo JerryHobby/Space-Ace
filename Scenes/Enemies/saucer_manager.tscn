@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://rj8eq0j16dsu"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/saucer_manager.gd" id="1_fhace"]
+
+[sub_resource type="Curve2D" id="Curve2D_bsl6d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -98, 235, -114, 0, 114, 0, 268, 105, -140, -2, 140, 2, 670, 237, -106, 0, 106, 0, 1080, 103, 0, 0, 0, 0, 1464, 235)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_6kf2w"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -83, -508, -6, 508, 6, 680, 479, 0, 0, 0, 0, 1402, -85)
+}
+point_count = 3
+
+[node name="SaucerManager" type="Node2D"]
+script = ExtResource("1_fhace")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+position = Vector2(0, 8)
+curve = SubResource("Curve2D_bsl6d")
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_6kf2w")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

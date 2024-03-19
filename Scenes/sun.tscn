@@ -130,6 +130,23 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_qvrhd"]
+resource_name = "pulse"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.788235, 0.788235, 0.788235, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_obnqc"]
 resource_name = "rotate"
 length = 60.0
@@ -147,23 +164,6 @@ tracks/0/keys = {
 "values": [0.0, 6.26573]
 }
 
-[sub_resource type="Animation" id="Animation_qvrhd"]
-resource_name = "pulse"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 2.9),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.823529, 0.823529, 0.823529, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0xo7"]
 _data = {
 "RESET": SubResource("Animation_pyv4d"),
@@ -172,7 +172,7 @@ _data = {
 }
 
 [node name="Sun" type="AnimatedSprite2D"]
-modulate = Color(0.930743, 0.930743, 0.930743, 1)
+modulate = Color(0.951077, 0.951077, 0.951077, 1)
 sprite_frames = SubResource("SpriteFrames_wqnft")
 autoplay = "default"
 frame = 3

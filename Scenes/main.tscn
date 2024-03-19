@@ -201,7 +201,9 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "(Arrows) Move
 (R-Ctrl) Shoot
-(Space) Pause"
+(Space) Pause
+(Q) Quit
+(G) God Mode"
 label_settings = SubResource("LabelSettings_cgn7e")
 
 [node name="music" type="AudioStreamPlayer" parent="."]

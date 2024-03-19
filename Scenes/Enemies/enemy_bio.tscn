@@ -22,3 +22,12 @@ waves = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_8t4d2")
+
+[node name="Marker2D" type="Marker2D" parent="Booms" index="0"]
+position = Vector2(0, -6.66667)
+
+[node name="Marker2D2" type="Marker2D" parent="Booms" index="1"]
+position = Vector2(0, 21.6667)
+
+[node name="HealthBar" parent="." index="5"]
+start_health = 50

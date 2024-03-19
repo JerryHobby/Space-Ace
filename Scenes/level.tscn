@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqcjt4j4gak2w"]
+[gd_scene load_steps=7 format=3 uid="uid://bqcjt4j4gak2w"]
 
 [ext_resource type="Script" path="res://Scenes/level.gd" id="1_3jgg2"]
 [ext_resource type="PackedScene" uid="uid://ht37v0usk801" path="res://Scenes/level_bg.tscn" id="2_w3xax"]
 [ext_resource type="PackedScene" uid="uid://bmt318tmus1h1" path="res://Scenes/player.tscn" id="3_f1c62"]
 [ext_resource type="AudioStream" uid="uid://ch3dlcjqwvmax" path="res://assets/sounds/loops/Mercury.wav" id="4_nje8h"]
 [ext_resource type="PackedScene" uid="uid://bypyjigiqrbnq" path="res://Scenes/Enemies/wave_manager.tscn" id="5_s3que"]
+[ext_resource type="PackedScene" uid="uid://rj8eq0j16dsu" path="res://Scenes/Enemies/saucer_manager.tscn" id="6_8xdkb"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_3jgg2")
@@ -21,3 +22,5 @@ stream = ExtResource("4_nje8h")
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="WaveManager" parent="." instance=ExtResource("5_s3que")]
+
+[node name="SaucerManager" parent="." instance=ExtResource("6_8xdkb")]

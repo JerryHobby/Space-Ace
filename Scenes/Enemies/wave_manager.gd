@@ -7,9 +7,9 @@ extends Node2D
 # used for testing specific scenes only
 const TEST_MODE:bool = false
 const TEST_SCENES:Array = [
-		#GameData.ENEMY_TYPE.ZIPPER,
-		GameData.ENEMY_TYPE.BIO,
-		GameData.ENEMY_TYPE.BOMBER,
+		GameData.ENEMY_TYPE.ZIPPER,
+		#GameData.ENEMY_TYPE.BIO,
+		#GameData.ENEMY_TYPE.BOMBER,
 	]
 
 const ANIM_FRAMES = {

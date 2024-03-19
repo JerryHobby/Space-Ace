@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmt318tmus1h1"]
+[gd_scene load_steps=10 format=3 uid="uid://bmt318tmus1h1"]
 
 [ext_resource type="Texture2D" uid="uid://cr411gj0du4h7" path="res://assets/ships/ships_human_1.png" id="1_boqmn"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_q3ssx"]
 [ext_resource type="PackedScene" uid="uid://mrtip63lfj5c" path="res://Scenes/Bullets/player_bullet.tscn" id="2_14ab8"]
+[ext_resource type="PackedScene" uid="uid://dwxvhkwxljqn7" path="res://Scenes/health_bar.tscn" id="4_8m3yx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gxpqv"]
 
@@ -63,7 +64,7 @@ _data = {
 }
 
 [node name="Player" type="Area2D" groups=["player"]]
-collision_mask = 3
+collision_mask = 26
 script = ExtResource("1_q3ssx")
 bullet_scene = ExtResource("2_14ab8")
 
@@ -81,4 +82,35 @@ libraries = {
 }
 autoplay = "fly"
 
+[node name="HealthBar" parent="." instance=ExtResource("4_8m3yx")]
+offset_left = -20.0
+offset_top = 18.0
+offset_right = 20.0
+offset_bottom = 21.0
+allow_greater = true
+start_health = 500
+
+[node name="Booms" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Booms"]
+position = Vector2(0, -19)
+
+[node name="Marker2D2" type="Marker2D" parent="Booms"]
+position = Vector2(10, -13)
+
+[node name="Marker2D3" type="Marker2D" parent="Booms"]
+position = Vector2(-13, -13)
+
+[node name="Marker2D4" type="Marker2D" parent="Booms"]
+position = Vector2(0, 14)
+
+[node name="Marker2D5" type="Marker2D" parent="Booms"]
+position = Vector2(14, 6)
+
+[node name="Marker2D6" type="Marker2D" parent="Booms"]
+position = Vector2(-14, 6)
+
+[node name="Marker2D7" type="Marker2D" parent="Booms"]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="died" from="HealthBar" to="." method="_on_health_bar_died"]
