@@ -33,6 +33,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		GameManager.load_level_scene()
 
+	if Input.is_action_just_pressed("reset_hs"):
+		DataStorage.reset_high_score()
+		set_labels()
 
 
 func play_music():

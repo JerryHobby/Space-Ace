@@ -201,6 +201,11 @@ layout_mode = 2
 text = "(G)od Mode"
 label_settings = SubResource("LabelSettings_cgn7e")
 
+[node name="ResestHSLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "(R)eset HS"
+label_settings = SubResource("LabelSettings_cgn7e")
+
 [node name="InGameLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "

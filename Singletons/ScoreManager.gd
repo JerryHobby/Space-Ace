@@ -4,17 +4,23 @@ var _score:int = 0
 var _high_score:int = 0
 var _used_cheat = false
 
+func _ready():
+	_high_score = DataStorage.get_high_score()
+
 
 func used_cheats() -> void:
 	_used_cheat = true
+
 
 func increment_score(v:int) -> void:
 	if GameManager.god_mode():
 		used_cheats()
 
+
 	_score += v
 	if !_used_cheat and _high_score < _score:
 		_high_score = _score
+		DataStorage.save_data()
 	SignalManager.on_score_updated.emit(_score)
 
 
@@ -39,6 +45,10 @@ func get_score_formatted() -> String:
 
 func get_high_score() -> int:
 	return _high_score
+
+
+func set_high_score(v:int) -> void:
+	_high_score = v
 
 
 func get_high_score_formatted() -> String:
