@@ -84,7 +84,7 @@ func die() -> void:
 	if _dead:
 		return
 	_dead = true
-	SignalManager.on_score_updated.emit(GameData.SCORE_ENEMY)
+	ScoreManager.increment_score(GameData.SCORE_ENEMY)
 	set_process(false)
 	await make_booms()
 	queue_free()

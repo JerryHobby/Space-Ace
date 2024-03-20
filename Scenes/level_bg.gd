@@ -9,7 +9,7 @@ const SPEED:float = 150.0
 
 
 func _ready():
-	pass # Replace with function body.
+	ScoreManager.reset_score()
 
 
 func _process(delta):

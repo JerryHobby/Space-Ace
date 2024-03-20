@@ -58,7 +58,7 @@ func shoot() -> void:
 
 
 func die() -> void:
-	SignalManager.on_score_updated.emit(GameData.SCORE_SAUCER)
+	ScoreManager.increment_score(GameData.SCORE_SAUCER)
 	set_process(false)
 	queue_free()
 

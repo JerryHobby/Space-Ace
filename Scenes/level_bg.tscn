@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ht37v0usk801"]
+[gd_scene load_steps=6 format=3 uid="uid://ht37v0usk801"]
 
 [ext_resource type="Script" path="res://Scenes/level_bg.gd" id="1_qc5tp"]
 [ext_resource type="Texture2D" uid="uid://u0qkamnlexd7" path="res://assets/backgrounds/jw.png" id="2_0mfas"]
 [ext_resource type="Texture2D" uid="uid://b0a2wp7vfgypx" path="res://assets/backgrounds/spr_stars01.png" id="2_70dfy"]
 [ext_resource type="Texture2D" uid="uid://co12m2t6dlfc2" path="res://assets/backgrounds/spr_stars03.png" id="4_40f5w"]
+[ext_resource type="PackedScene" uid="uid://f4pkb4nyl1md" path="res://Scenes/shake_cam.tscn" id="5_g7jcn"]
 
 [node name="LevelBg" type="ParallaxBackground"]
 script = ExtResource("1_qc5tp")
@@ -44,3 +45,6 @@ motion_mirroring = Vector2(2.08165e-12, 2560)
 position = Vector2(1034, 0)
 rotation = 3.14159
 texture = ExtResource("4_40f5w")
+
+[node name="ShakeCam" parent="." instance=ExtResource("5_g7jcn")]
+anchor_mode = 0

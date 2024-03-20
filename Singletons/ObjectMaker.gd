@@ -9,13 +9,13 @@ const SIMPLE_SCENES = {
 
 var powerup_scene = preload("res://Scenes/power_up.tscn")
 
-
 func add_child_deferred(child_to_add, parent:Node2D) -> void:
 	parent.add_child(child_to_add)
 
 
 func call_add_child(child_to_add, parent:Node2D) -> void:
-	call_deferred("add_child_deferred", child_to_add, parent)
+	if parent and child_to_add:
+		call_deferred("add_child_deferred", child_to_add, parent)
 
 
 func create_simple_scene(start_pos: Vector2, key: SCENE_KEY, parent:Node2D) -> void:

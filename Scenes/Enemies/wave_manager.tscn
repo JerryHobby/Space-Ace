@@ -16,7 +16,7 @@ point_count = 6
 
 [sub_resource type="Curve2D" id="Curve2D_i5xhd"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -139, 141.912, -1.06152, -97.66, 1.06152, 97.66, 1266, 213, -3.18456, -130.567, 3.18456, 130.567, -14, 333, -5.30761, -149.675, 5.30761, 149.675, 1268, 421, -4.24609, -113.583, 4.24609, 113.583, -18, 533, -10.6152, -7.43065, 10.6152, 7.43065, 1364, 622)
+"points": PackedVector2Array(0, 0, 0, 0, -128, 164.706, -1.06152, -97.66, 1.06152, 97.66, 1266, 213, -3.18456, -130.567, 3.18456, 130.567, -14, 333, -5.30761, -149.675, 5.30761, 149.675, 1268, 421, -4.24609, -113.583, 4.24609, 113.583, -18, 533, -10.6152, -7.43065, 10.6152, 7.43065, 1364, 622)
 }
 point_count = 6
 
@@ -58,7 +58,7 @@ curve = SubResource("Curve2D_i5xhd")
 [node name="Bombers" type="Node2D" parent="Paths"]
 
 [node name="Path2D1" type="Path2D" parent="Paths/Bombers"]
-position = Vector2(57, -78)
+position = Vector2(55, 55)
 curve = SubResource("Curve2D_vc3qp")
 
 [node name="Path2D2" type="Path2D" parent="Paths/Bombers"]

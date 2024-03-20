@@ -34,7 +34,7 @@ func _on_area_2d_area_entered(area):
 
 func die() -> void:
 	_dead = true
-	SignalManager.on_score_updated.emit(GameData.SCORE_ASTEROID)
+	ScoreManager.increment_score(GameData.SCORE_ASTEROID)
 	make_powerup()
 	await make_booms()
 	set_process(false)

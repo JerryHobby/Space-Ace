@@ -146,5 +146,3 @@ func on_powerup_hit(powerup:GameData.POWERUP_TYPE) -> void:
 func _on_health_bar_died():
 	health_bar.disconnect("died", _on_health_bar_died)
 	ObjectMaker.create_boom(global_position)
-	print("Player DIED")
-	pause()
