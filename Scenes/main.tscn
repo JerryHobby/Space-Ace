@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4msnrglp0c7k"]
+[gd_scene load_steps=16 format=3 uid="uid://c4msnrglp0c7k"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_dvxe8"]
 [ext_resource type="Texture2D" uid="uid://b0a2wp7vfgypx" path="res://assets/backgrounds/spr_stars01.png" id="2_2ecbk"]
@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://btkveqgboeckf" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="8_034v6"]
 [ext_resource type="Texture2D" uid="uid://dae522f57lu27" path="res://assets/ui/red_button01.png" id="9_713ea"]
 [ext_resource type="AudioStream" uid="uid://c2ptaevxktudd" path="res://assets/sounds/loops/TitleScreen.mp3" id="12_1gb2p"]
+[ext_resource type="PackedScene" uid="uid://e0dhjac2qeu7" path="res://Scenes/Enemies/asteroid_manager.tscn" id="14_g7tps"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cgn7e"]
 font = ExtResource("8_034v6")
@@ -65,6 +66,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_d6183")
 
+[node name="AsteroidManager" parent="CanvasLayer" instance=ExtResource("14_g7tps")]
+demo_mode = true
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,6 +91,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="Sun" parent="CanvasLayer/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("5_so1n2")]
+z_index = -1
 position = Vector2(341, 83)
 scale = Vector2(2.1, 2.1)
 offset = Vector2(-19, 2.08165e-12)
@@ -132,6 +137,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ExitButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("7_7evgi")
 texture_pressed = ExtResource("6_meu2g")
@@ -190,6 +196,11 @@ layout_mode = 2
 text = "(S)ounds"
 label_settings = SubResource("LabelSettings_cgn7e")
 
+[node name="GodModeLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "(G)od Mode"
+label_settings = SubResource("LabelSettings_cgn7e")
+
 [node name="InGameLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
@@ -202,9 +213,43 @@ layout_mode = 2
 text = "(Arrows) Move
 (R-Ctrl) Shoot
 (Space) Pause
-(Q) Quit
-(G) God Mode"
+(Q) Quit"
 label_settings = SubResource("LabelSettings_cgn7e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer/MarginContainer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_right = -600.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 22
+
+[node name="HighScoreTitleLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "HIGH SCORE
+"
+label_settings = ExtResource("8_8bj0v")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+label_settings = ExtResource("8_8bj0v")
+vertical_alignment = 1
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_1gb2p")

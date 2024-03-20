@@ -90,7 +90,7 @@ func shoot() -> void:
 		bullet_direction,
 		bullet_speed,
 		bullet_damage )
-	get_tree().root.add_child(bullet)
+	get_tree().current_scene.add_child(bullet)
 
 
 func _on_area_entered(area):
@@ -118,6 +118,10 @@ func _on_area_entered(area):
 	else:
 		print("Unrecognized collision")
 		pause()
+
+	if GameManager.god_mode():
+		damage = 0
+		ScoreManager.used_cheats()
 
 	SignalManager.on_player_hit.emit(damage)
 	health_bar.take_damage(damage)

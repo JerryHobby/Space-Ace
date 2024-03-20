@@ -40,6 +40,15 @@ custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
 size_flags_vertical = 4
 
+[node name="GodLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "God Mode"
+label_settings = ExtResource("2_mr5j0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="ScoreLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -33,7 +33,7 @@ func create_powerup_type(pos:Vector2, type:GameData.POWERUP_TYPE) -> void:
 	var powerup = powerup_scene.instantiate()
 	powerup.set_powerup_type(type)
 	powerup.global_position = pos
-	get_tree().root.call_deferred("add_child", powerup)
+	get_tree().current_scene.call_deferred("add_child", powerup)
 
 
 func create_explosion(start_pos: Vector2, parent:Node2D) -> void:

@@ -5,6 +5,9 @@ extends Node2D
 
 @onready var music_label = $CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer/MusicLabel
 @onready var sound_label = $CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer/SoundLabel
+@onready var god_mode_label = $CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer/GodModeLabel
+@onready var high_score_label = $CanvasLayer/MarginContainer/CanvasLayer/MarginContainer/HBoxContainer/HighScoreLabel
+
 
 
 func _ready():
@@ -22,6 +25,14 @@ func _process(_delta):
 	if Input.is_action_just_pressed("sounds"):
 		GameManager.toggle_sounds()
 		set_labels()
+
+	if Input.is_action_just_pressed("god_mode"):
+		GameManager.toggle_god_mode()
+		set_labels()
+
+	if Input.is_action_just_pressed("pause"):
+		GameManager.load_level_scene()
+
 
 
 func play_music():
@@ -41,6 +52,13 @@ func set_labels():
 		sound_label.text = "(S)ounds on"
 	else:
 		sound_label.text = "(S)ounds off"
+
+	if GameManager.god_mode():
+		god_mode_label.text = "(G)odMode on"
+	else:
+		god_mode_label.text = "(G)odMode off"
+
+	high_score_label.text = ScoreManager.get_high_score_formatted()
 
 
 func _on_play_button_pressed():

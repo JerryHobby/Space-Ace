@@ -5,6 +5,8 @@ const main_scene:PackedScene = preload("res://Scenes/main.tscn")
 
 var _music = false
 var _sounds = false
+var _god_mode = false
+
 
 func load_main_scene() -> void:
 	get_tree().change_scene_to_packed(main_scene)
@@ -25,3 +27,9 @@ func sounds() -> bool:
 func music() -> bool:
 	return _music
 
+func god_mode() -> bool:
+	return _god_mode
+
+func toggle_god_mode() -> void:
+	_god_mode = !_god_mode
+	SignalManager.god_mode.emit()

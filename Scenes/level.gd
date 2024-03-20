@@ -18,6 +18,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("sounds"):
 		GameManager.toggle_sounds()
 
+	if Input.is_action_just_pressed("god_mode"):
+		GameManager.toggle_god_mode()
+
 	if Input.is_action_pressed("shoot"):
 		pass
 

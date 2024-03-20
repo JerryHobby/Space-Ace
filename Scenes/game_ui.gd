@@ -2,28 +2,26 @@ extends Control
 
 @onready var health_bar = $ColorRect/MarginContainer/HBoxContainer/HealthBar
 @onready var score_label = $ColorRect/MarginContainer/HBoxContainer/ScoreLabel
+@onready var god_label = $ColorRect/MarginContainer/HBoxContainer/GodLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalManager.on_health_bonus.connect(on_health_bonus)
 	SignalManager.on_score_updated.connect(on_score_updated)
 	SignalManager.on_player_hit.connect(on_player_hit)
+	SignalManager.god_mode.connect(god_mode)
+	god_mode()
 
 
-func format_score(v:int) -> String:
-	var s = str(v)
-	if s.length() > 9:
-		s = s.insert(s.length() - 9, ",")
-	if s.length() > 6:
-		s = s.insert(s.length() - 6, ",")
-	if s.length() > 3:
-		s = s.insert(s.length() - 3, ",")
-
-	return s
+func god_mode() -> void:
+	if GameManager.god_mode():
+		god_label.show()
+	else:
+		god_label.hide()
 
 
 func on_score_updated(v:int) -> void:
-	score_label.text = format_score(v)
+	score_label.text = ScoreManager.get_score_formatted()
 
 
 func on_player_hit(v:int) -> void:

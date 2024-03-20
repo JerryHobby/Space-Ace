@@ -8,6 +8,8 @@ const ASTEROID_SPRITES = [
 	preload("res://assets/asteroids/a3.png"),
 ]
 
+@export var demo_mode:bool = false
+
 const WAIT_TIME:float = 20.0
 const WAIT_VAR:float = 2.0
 const INITIAL_DELAY:float = 2
@@ -15,8 +17,12 @@ const INITIAL_DELAY:float = 2
 @onready var timer = $Timer
 @onready var paths = $Paths.get_children()
 
+var _wait_time:float = WAIT_TIME
+
+
 func _ready():
-	await get_tree().create_timer(INITIAL_DELAY).timeout
+	if !demo_mode:
+		await get_tree().create_timer(INITIAL_DELAY).timeout
 	spawn_asteroid()
 
 
@@ -27,7 +33,13 @@ func spawn_asteroid() -> void:
 
 	p.add_child(asteroid)
 	asteroid.set_sprite(s)
-	Utils.set_and_start_time(timer, WAIT_TIME, WAIT_VAR)
+
+	if demo_mode:
+		asteroid.hide_health()
+		Utils.set_and_start_time(timer, 10, 0)
+	else:
+		_wait_time -= GameData.ACCELERATOR
+		Utils.set_and_start_time(timer, WAIT_TIME, WAIT_VAR)
 
 
 func _on_timer_timeout():
