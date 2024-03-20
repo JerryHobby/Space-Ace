@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://e0dhjac2qeu7"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/asteroid_manager.gd" id="1_xghcc"]
+
+[sub_resource type="Curve2D" id="Curve2D_ibpys"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1482, 616, 0, 0, 0, 0, -89, 173)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_q7puj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1547, 167, 0, 0, 0, 0, -95, 395)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_re3fo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -96, 792, 0, 0, 0, 0, 1154, -72)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_5y41r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 898, 921, 0, 0, 0, 0, 97, -100)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_6dvqt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -70, 112, 0, 0, 0, 0, 1497, 395)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hx5mr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 822, -48, 0, 0, 0, 0, 959, 851)
+}
+point_count = 2
+
+[node name="AsteroidManager" type="Node2D"]
+script = ExtResource("1_xghcc")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_ibpys")
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_q7puj")
+
+[node name="Path2D3" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_re3fo")
+
+[node name="Path2D4" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_5y41r")
+
+[node name="Path2D5" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_6dvqt")
+
+[node name="Path2D6" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_hx5mr")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

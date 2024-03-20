@@ -2,7 +2,7 @@ extends Area2D
 
 var _direction:Vector2 = Vector2.UP
 var _speed:float = 300.0
-var _damage:int = 10
+var _damage:int = GameData.DAMAGE_BULLET
 
 
 func _ready():
@@ -38,3 +38,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 func _on_area_entered(area:Node2D):
 	blow_up(area)
 
+func get_bullet_damage() -> int:
+	return _damage

@@ -11,7 +11,6 @@ height = 50.0
 scale = Vector2(0.6, 0.6)
 shoots = true
 bullet_scene = ExtResource("2_1v0fw")
-bullet_damage = 5
 bullet_speed = 300.0
 bullet_direction = Vector2(2.08165e-12, 1)
 bullet_wait_time = 2.0

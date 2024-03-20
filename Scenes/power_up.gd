@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED:float = 40
+const SPEED:float = 100
 
 @onready var sprite_2d = $Sprite2D
 @onready var sound = $Sound
@@ -29,8 +29,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free() # Replace with function body.
 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	SignalManager.on_powerup_hit.emit(_powerup_type)
+	SignalManager.on_score_updated.emit(GameData.SCORE_POWERUP)
 	queue_free()
 
 

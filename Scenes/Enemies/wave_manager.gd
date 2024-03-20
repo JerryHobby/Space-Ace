@@ -3,6 +3,7 @@ extends Node2D
 @onready var zippers = $Paths/Zippers
 @onready var biomechs = $Paths/Biomechs
 @onready var bombers = $Paths/Bombers
+@onready var spawn_timer = $SpawnTimer
 
 # used for testing specific scenes only
 const TEST_MODE:bool = false
@@ -28,11 +29,15 @@ var _zipper_paths:Array = []
 var _biomechs_paths:Array = []
 var _bombers_paths:Array = []
 
+var game_speed:float = GameData.INITIAL_WAVE_SPEED
 
 func _ready():
 	_zipper_paths = zippers.get_children()
 	_biomechs_paths = biomechs.get_children()
 	_bombers_paths = bombers.get_children()
+	
+	spawn_timer.wait_time = game_speed
+	spawn_timer.start()
 	spawn_wave()
 
 
@@ -79,6 +84,9 @@ func spawn_wave():
 		var new_enemy = create_enemy(enemy_speed, anim, enemy_type)
 		await get_tree().create_timer(1 - enemy_speed * .1).timeout
 		path.add_child(new_enemy)
+	
+	game_speed -= GameData.ACCELERATOR
+	spawn_timer.wait_time = game_speed
 
 
 func normalize_speed(path:Path2D, enemy_speed:float) -> float:

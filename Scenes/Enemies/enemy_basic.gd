@@ -21,7 +21,6 @@ const BOOM_DELAY:float = 0.1
 
 var _player_ref:Player
 var _speed:float = 0.0
-var _can_shoot:bool = false
 var _dead:bool = false
 var _anim_string:String
 
@@ -85,6 +84,7 @@ func die() -> void:
 	if _dead:
 		return
 	_dead = true
+	SignalManager.on_score_updated.emit(GameData.SCORE_ENEMY)
 	set_process(false)
 	await make_booms()
 	queue_free()
@@ -92,7 +92,7 @@ func die() -> void:
 func make_booms() -> void:
 	for b in booms.get_children():
 		await get_tree().create_timer(BOOM_DELAY).timeout
-		ObjectMaker.create_boom(b.global_position, self)
+		ObjectMaker.create_boom(b.global_position)
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
@@ -105,11 +105,12 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
 
-func _on_area_2d_area_entered(area):
+func _on_area_2d_area_entered(_area):
 	health_bar.take_damage(20)
 
 
 func _on_health_bar_died():
+	health_bar.disconnect("died", _on_health_bar_died)
 	var chance = randf_range(0, 1)
 	if chance <= GameData.POWERUP_CHANCE:
 		ObjectMaker.create_powerup_type(global_position, GameData.POWERUP_TYPE.HEALTH)

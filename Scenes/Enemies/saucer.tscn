@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://e3cvkphnn7a7"]
+[gd_scene load_steps=17 format=3 uid="uid://e3cvkphnn7a7"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/saucer.gd" id="1_cd4s3"]
 [ext_resource type="Texture2D" uid="uid://cjry72dmet30f" path="res://assets/ships/saucer_2.png" id="1_iwbq2"]
@@ -100,13 +100,68 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_873s6"]
+resource_name = "death"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Sprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(2, 1, 1),
+"update": 0,
+"values": [Color(1, 0.878431, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [false],
+"method": &"set_process"
+}, {
+"args": [],
+"method": &"make_booms"
+}, {
+"args": [],
+"method": &"make_powerup"
+}, {
+"args": [],
+"method": &"die"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pv2u8"]
 _data = {
 "RESET": SubResource("Animation_okyvj"),
+"death": SubResource("Animation_873s6"),
 "shoot": SubResource("Animation_hwn0d"),
 "spin": SubResource("Animation_ge3si")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cp43a"]
+animation = &"death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5ry2"]
 animation = &"shoot"
@@ -122,6 +177,8 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_55lne"]
+states/death/node = SubResource("AnimationNodeAnimation_cp43a")
+states/death/position = Vector2(714.485, 54.895)
 states/shoot/node = SubResource("AnimationNodeAnimation_p5ry2")
 states/shoot/position = Vector2(577.5, 91.2)
 states/spin/node = SubResource("AnimationNodeAnimation_fystb")
@@ -134,17 +191,18 @@ scale = Vector2(1.5, 1.5)
 rotates = false
 script = ExtResource("1_cd4s3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["saucer"]]
 collision_layer = 2
 collision_mask = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-rotation = 1.65125
+rotation = 1.47329
 texture = ExtResource("1_iwbq2")
 offset = Vector2(2.08165e-12, 3)
 hframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_i1f6m")
 
 [node name="Booms" type="Node2D" parent="Area2D"]

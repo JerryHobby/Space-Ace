@@ -87,8 +87,6 @@ offset_left = -20.0
 offset_top = 18.0
 offset_right = 20.0
 offset_bottom = 21.0
-allow_greater = true
-start_health = 500
 
 [node name="Booms" type="Node2D" parent="."]
 

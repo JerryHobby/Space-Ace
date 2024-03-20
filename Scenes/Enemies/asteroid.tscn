@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk2j500mif1j4"]
+
+[ext_resource type="Texture2D" uid="uid://b2sq55ncib35e" path="res://assets/asteroids/a1.png" id="1_6acdf"]
+[ext_resource type="Script" path="res://Scenes/Enemies/asteroid.gd" id="1_e4xcp"]
+[ext_resource type="PackedScene" uid="uid://dwxvhkwxljqn7" path="res://Scenes/health_bar.tscn" id="3_mgfvs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b0sg8"]
+radius = 26.0192
+
+[node name="Asteroid" type="PathFollow2D"]
+rotates = false
+script = ExtResource("1_e4xcp")
+
+[node name="Area2D" type="Area2D" parent="." groups=["asteroid"]]
+collision_layer = 2
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_6acdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_b0sg8")
+
+[node name="HealthBar" parent="." groups=["enemy"] instance=ExtResource("3_mgfvs")]
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -32.0
+max_value = 50.0
+value = 50.0
+start_health = 150
+
+[node name="Booms" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Booms"]
+position = Vector2(0, -11)
+
+[node name="Marker2D2" type="Marker2D" parent="Booms"]
+position = Vector2(7, -4)
+
+[node name="Marker2D3" type="Marker2D" parent="Booms"]
+position = Vector2(-8, -6)
+
+[node name="Marker2D4" type="Marker2D" parent="Booms"]
+position = Vector2(0, 11)
+
+[node name="Marker2D5" type="Marker2D" parent="Booms"]
+position = Vector2(9, 5)
+
+[node name="Marker2D6" type="Marker2D" parent="Booms"]
+position = Vector2(-6, 6)
+
+[node name="Marker2D7" type="Marker2D" parent="Booms"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="died" from="HealthBar" to="." method="_on_health_bar_died"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

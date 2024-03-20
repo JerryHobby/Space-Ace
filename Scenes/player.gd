@@ -94,54 +94,57 @@ func shoot() -> void:
 
 
 func _on_area_entered(area):
-	if is_instance_valid(_shield):
-		return
 
-	var damage = 0
-
-	if area.collision_layer & GameData.LAYER_ENEMY:
-		print("Hit enemy")
-		damage = 100
-		ObjectMaker.create_boom(global_position, self)
-		
-	elif area.collision_layer & GameData.LAYER_ENEMY_BULLET:
-		print("Hit by bullet")
-		damage = 10
+	var damage:int = 0
 	
-	elif area.collision_layer & GameData.LAYER_HOMING_MISSILE:
-		print("Hit by missile")
-		damage = 25
+	if area.is_in_group(GameData.GROUP_ENEMY_SHIP):
+		damage = GameData.DAMAGE_COLLISION
+		ObjectMaker.create_boom(global_position)
+		
+	elif area.is_in_group(GameData.GROUP_SAUCER):
+		damage = GameData.DAMAGE_SAUCER_COLLISION
+		ObjectMaker.create_boom(global_position)
+
+	elif area.is_in_group(GameData.GROUP_ASTEROID):
+		damage = GameData.DAMAGE_ASTEROID_COLLISION
+		ObjectMaker.create_boom(global_position)
+
+	elif area.is_in_group(GameData.GROUP_HOMING_MISSILE):
+		damage = GameData.DAMAGE_MISSILE
+
+	elif area.is_in_group(GameData.GROUP_BULLET):
+		damage = area.get_bullet_damage()
+
 	else:
 		print("Unrecognized collision")
 		pause()
 
+	SignalManager.on_player_hit.emit(damage)
 	health_bar.take_damage(damage)
 
 
 func add_shield():
-	print("Create shield")
 	if is_instance_valid(_shield):
 		#refresh new shield
 		_shield.queue_free()
 
 	_shield = shield_scene.instantiate()
-	add_child(_shield)
+	call_deferred("add_child", _shield)
 
 
 func on_powerup_hit(powerup:GameData.POWERUP_TYPE) -> void:
 	SoundManager.play_power_up_sound(powerup, sound)
 	
 	if powerup == GameData.POWERUP_TYPE.HEALTH:
-		print("Powerup: HEALTH")
-		health_bar.set_full_health()
+		health_bar.inc_value(GameData.HEALTH_BONUS)
+		SignalManager.on_health_bonus.emit(GameData.HEALTH_BONUS)
 		
 	if powerup == GameData.POWERUP_TYPE.SHIELD:
-		print("Powerup: SHIELD")
 		add_shield()
 
 
 func _on_health_bar_died():
-	print("DIED")
-	ObjectMaker.create_boom(global_position, self)
-	SignalManager.game_over.emit()
-	#queue_free()
+	health_bar.disconnect("died", _on_health_bar_died)
+	ObjectMaker.create_boom(global_position)
+	print("Player DIED")
+	pause()

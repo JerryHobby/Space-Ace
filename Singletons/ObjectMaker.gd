@@ -33,12 +33,12 @@ func create_powerup_type(pos:Vector2, type:GameData.POWERUP_TYPE) -> void:
 	var powerup = powerup_scene.instantiate()
 	powerup.set_powerup_type(type)
 	powerup.global_position = pos
-	get_tree().root.add_child(powerup)
+	get_tree().root.call_deferred("add_child", powerup)
 
 
 func create_explosion(start_pos: Vector2, parent:Node2D) -> void:
-	await create_simple_scene(start_pos, SCENE_KEY.EXPLOSION, parent)
+	create_simple_scene(start_pos, SCENE_KEY.EXPLOSION, parent)
 
 
-func create_boom(start_pos: Vector2, parent:Node2D) -> void:
+func create_boom(start_pos: Vector2) -> void:
 	create_simple_scene(start_pos, SCENE_KEY.BOOM, get_tree().current_scene)

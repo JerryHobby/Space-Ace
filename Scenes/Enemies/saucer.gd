@@ -11,7 +11,6 @@ const BOOM_DELAY:float = 0.10
 
 var _missile_scene:PackedScene = preload("res://Scenes/Bullets/homing_missile.tscn")
 var _shooting:bool = false
-var _dead = false
 
 var _shots_fired:int = 0
 
@@ -29,7 +28,7 @@ func _process(delta):
 		try_shoot()
 
 
-func _on_area_2d_area_entered(area):
+func _on_area_2d_area_entered(_area):
 	health_bar.take_damage(10) # Replace with function body.
 
 
@@ -42,7 +41,7 @@ func update_shots_fired() -> void:
 func try_shoot() -> void:
 	if _shots_fired >= len(FIRE_OFFSETS):
 		return
-		
+	
 	if abs(progress_ratio - FIRE_OFFSETS[_shots_fired]) < SHOOT_PROGRESS:
 		state_machine.travel("shoot")
 		update_shots_fired()
@@ -59,27 +58,26 @@ func shoot() -> void:
 
 
 func die() -> void:
-	if _dead:
-		return
-	_dead = true
+	SignalManager.on_score_updated.emit(GameData.SCORE_SAUCER)
 	set_process(false)
-	make_powerup()
-	await make_booms()
 	queue_free()
 
+
+# called from animation_tree
 func make_powerup() -> void:
-	#ObjectMaker.create_powerup(global_position)
 	ObjectMaker.create_powerup_type(global_position, GameData.POWERUP_TYPE.SHIELD)
 
 
+# called from animation_tree
 func make_booms() -> void:
 	for b in booms.get_children():
-		ObjectMaker.create_boom(b.global_position, self)
+		ObjectMaker.create_boom(b.global_position)
 		await get_tree().create_timer(BOOM_DELAY).timeout
 
 
 func _on_health_bar_died():
-	die()
+	health_bar.disconnect("died", _on_health_bar_died)
+	state_machine.travel("death")
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

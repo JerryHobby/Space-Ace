@@ -37,9 +37,10 @@ func turn(delta) -> void:
 
 func blow_up() -> void:
 	ObjectMaker.create_explosion(global_position, get_tree().current_scene)
+	SignalManager.on_score_updated.emit(GameData.SCORE_MISSILE)
 	set_process(false)
 	queue_free()
 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	blow_up()

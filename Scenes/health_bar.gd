@@ -15,8 +15,8 @@ const COLOR_OVER:Color = Color("#4cc9f0")
 func _ready():
 	max_value = start_health
 	value = max_value
-	level_low = start_health * 0.3
-	level_med = start_health * 0.7
+	level_low = int(start_health * 0.3)
+	level_med = int(start_health * 0.7)
 	set_color()
 
 
@@ -38,9 +38,9 @@ func inc_value(v:int) -> void:
 	set_color()
 
 
-func set_full_health() -> void:
-	value = max_value
-	set_color()
+#func set_full_health() -> void:
+	#value = max_value
+	#set_color()
 
 
 func take_damage(v:int) -> void:

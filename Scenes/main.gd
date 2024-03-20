@@ -13,7 +13,7 @@ func _ready():
 		music.play()
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("music"):
 		GameManager.toggle_music()
 		set_labels()
