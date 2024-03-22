@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmo1dvf52spax"]
+
+[ext_resource type="LabelSettings" uid="uid://c60fmybfv021m" path="res://Scenes/title-red-72.tres" id="1_hvp6k"]
+[ext_resource type="Script" path="res://Scenes/game_over.gd" id="1_w0uoo"]
+[ext_resource type="PackedScene" uid="uid://ht37v0usk801" path="res://Scenes/level_bg.tscn" id="2_0mwtc"]
+[ext_resource type="FontFile" uid="uid://pwk8k5t1t0cd" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_ox1lg"]
+[ext_resource type="PackedScene" uid="uid://e0dhjac2qeu7" path="res://Scenes/Enemies/asteroid_manager.tscn" id="3_5iujs"]
+[ext_resource type="LabelSettings" uid="uid://fpdnxewec8yu" path="res://Scenes/score-50-white.tres" id="5_l7kv8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ixege"]
+font = ExtResource("2_ox1lg")
+font_size = 60
+font_color = Color(0.956863, 0.729412, 0.25098, 1)
+outline_size = 11
+outline_color = Color(0.686275, 0, 0, 1)
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 3)
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w0uoo")
+
+[node name="LevelBg" parent="." instance=ExtResource("2_0mwtc")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.0313726, 1, 0.262745)
+
+[node name="AsteroidManager" parent="ColorRect" instance=ExtResource("3_5iujs")]
+demo_mode = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.5
+offset_top = -65.5
+offset_right = 344.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+label_settings = ExtResource("1_hvp6k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Press Space to Quit"
+label_settings = SubResource("LabelSettings_ixege")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ixege")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Score: 10,000"
+label_settings = ExtResource("5_l7kv8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "High Score: 10,000"
+label_settings = ExtResource("5_l7kv8")
+horizontal_alignment = 1
+vertical_alignment = 1

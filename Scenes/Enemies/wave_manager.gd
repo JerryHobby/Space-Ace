@@ -25,68 +25,90 @@ const ENEMY_SCENES = {
 	GameData.ENEMY_TYPE.BOMBER: preload("res://Scenes/Enemies/enemy_bomber.tscn")
 }
 
-var _zipper_paths:Array = []
-var _biomechs_paths:Array = []
-var _bombers_paths:Array = []
+var wave_list:WaveListResource
 
-var game_speed:float = GameData.INITIAL_WAVE_SPEED
+var wave_res:WaveResource 
+
+var _paths = {
+	GameData.ENEMY_TYPE.ZIPPER:
+		{
+			"paths":  [],
+			"last_path": 0
+		},
+	GameData.ENEMY_TYPE.BIO: 
+		{
+			"paths":  [],
+			"last_path": 0
+		},
+	GameData.ENEMY_TYPE.BOMBER: 
+		{
+			"paths":  [],
+			"last_path": 0
+		}
+}
 
 func _ready():
-	_zipper_paths = zippers.get_children()
-	_biomechs_paths = biomechs.get_children()
-	_bombers_paths = bombers.get_children()
+	_paths[GameData.ENEMY_TYPE.ZIPPER].paths = zippers.get_children()
+	_paths[GameData.ENEMY_TYPE.BIO].paths = biomechs.get_children()
+	_paths[GameData.ENEMY_TYPE.BOMBER].paths = bombers.get_children()
+	wave_list = load("res://Resources/Waves/wave_list.tres")
 	
-	spawn_timer.wait_time = game_speed
+	spawn_timer.wait_time = wave_list.wave_gap
 	spawn_timer.start()
 	spawn_wave()
 
 
-func create_enemy(speed:float, anim_name:String, enemy_type:GameData.ENEMY_TYPE):
+func create_enemy(speed:float, anim_name:String, enemy_type:GameData.ENEMY_TYPE, bullet_wait_time:float):
 	var enemy_scene = ENEMY_SCENES[enemy_type].instantiate()
-	enemy_scene.setup(speed, anim_name)
+	enemy_scene.setup(speed, anim_name, bullet_wait_time)
 	return enemy_scene
 
 
-func spawn_wave():
-	var enemy_type = GameData.ENEMY_TYPE.values().pick_random()
+func update_speeds() -> void:
+	wave_list.wave_gap -= wave_list.speed_factor
 	
+	if wave_list.wave_gap < 2:
+		wave_list.wave_gap = 2
+	
+	wave_res.speed += (wave_list.speed_factor)/10
+	
+	wave_res.gap -= ScoreManager.get_waves()/200
+	if wave_res.gap < 0.01:
+		wave_res.gap = 0.1
+
+	wave_res.bullet_wait_time -= wave_list.speed_factor * 0.3
+	if wave_res.bullet_wait_time < .5:
+		wave_res.bullet_wait_time = .5
+
+
+func spawn_wave():
+	wave_res = wave_list.get_next_wave()
+	var enemy_type = wave_res.enemy_type
+	var normalized_speed:float
+
 	# used for testing specific scenes only
 	if TEST_MODE:
 		while enemy_type not in TEST_SCENES:
 			enemy_type = GameData.ENEMY_TYPE.values().pick_random()
 
 	var anim = ANIM_FRAMES[enemy_type].pick_random()
-	var enemy_speed = 1.0
-
-
-	var path:Path2D
+	var path = _paths[enemy_type].paths.pick_random()
+	update_speeds()
 	
-	match enemy_type:
-		GameData.ENEMY_TYPE.ZIPPER:
-			path = _zipper_paths.pick_random()
-			enemy_speed = .6
-		GameData.ENEMY_TYPE.BIO:
-			path = _biomechs_paths.pick_random()
-			enemy_speed = .3
-		GameData.ENEMY_TYPE.BOMBER:
-			path = _bombers_paths.pick_random()
-			enemy_speed = .15
-		_:
-			path = _zipper_paths.pick_random()
+	normalized_speed = normalize_speed(path, wave_res.speed)
+	var waves = wave_res.min + floor(wave_list.speed_factor * ScoreManager.get_waves())
 
-	enemy_speed = normalize_speed(path, enemy_speed)
-	
-	# create one to get count
-	var waves = create_enemy(enemy_speed, anim, enemy_type).waves
-	
+	if waves > wave_res.max:
+		waves = wave_res.max
+
+	ScoreManager.increment_waves()
 	# create enemies
 	for num in range(waves):
-		var new_enemy = create_enemy(enemy_speed, anim, enemy_type)
-		await get_tree().create_timer(1 - enemy_speed * .1).timeout
+		var new_enemy = create_enemy(normalized_speed, anim, enemy_type, wave_res.bullet_wait_time)
+		await get_tree().create_timer(wave_res.gap).timeout
 		path.add_child(new_enemy)
 	
-	game_speed -= GameData.ACCELERATOR
-	spawn_timer.wait_time = game_speed
+	spawn_timer.wait_time = wave_list.wave_gap
 
 
 func normalize_speed(path:Path2D, enemy_speed:float) -> float:

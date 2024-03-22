@@ -137,7 +137,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ExitButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 texture_normal = ExtResource("7_7evgi")
 texture_pressed = ExtResource("6_meu2g")
@@ -216,7 +215,7 @@ horizontal_alignment = 1
 [node name="KeysLabel" type="Label" parent="CanvasLayer/MarginContainer/CanvasLayer2/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "(Arrows) Move
-(R-Ctrl) Shoot
+(Shift) Shoot
 (Space) Pause
 (Q) Quit"
 label_settings = SubResource("LabelSettings_cgn7e")
@@ -258,6 +257,7 @@ vertical_alignment = 1
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_1gb2p")
+volume_db = -8.0
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 

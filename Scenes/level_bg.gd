@@ -8,10 +8,6 @@ extends ParallaxBackground
 const SPEED:float = 150.0
 
 
-func _ready():
-	ScoreManager.reset_score()
-
-
 func _process(delta):
 	parallax_layer_bg.motion_offset.y += SPEED * delta * 0.1
 	parallax_layer_1.motion_offset.y += SPEED * delta * 0.15

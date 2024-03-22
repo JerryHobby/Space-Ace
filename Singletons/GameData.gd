@@ -3,8 +3,8 @@ extends Node
 enum ENEMY_TYPE { ZIPPER, BIO, BOMBER }
 enum POWERUP_TYPE { HEALTH, SHIELD }
 
-const HEALTH_BONUS:int = 50
-const SHIELD_LIFE:float = 3.0
+const HEALTH_BONUS:int = 70
+const SHIELD_DURATION:float = 5.0
 const POWERUP_CHANCE:float = 0.15
 
 const GROUP_PLAYER:String = "player"
@@ -25,9 +25,6 @@ const SCORE_SAUCER:int = 1000
 const SCORE_ENEMY:int = 500
 const SCORE_MISSILE:int = 50
 const SCORE_POWERUP:int = 50
-
-const INITIAL_WAVE_SPEED:float = 12.0
-const ACCELERATOR:float = 0.1
 
 const LAYER_PLAYER:int = 1
 const LAYER_ENEMY:int = 2

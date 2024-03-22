@@ -2,6 +2,7 @@ extends Node
 
 var _score:int = 0
 var _high_score:int = 0
+var _waves:int = 1
 var _used_cheat = false
 
 func _ready():
@@ -12,10 +13,18 @@ func used_cheats() -> void:
 	_used_cheat = true
 
 
+func increment_waves() -> void:
+	_waves += 1
+	SignalManager.on_score_updated.emit(_score)
+
+
+func get_waves() -> int:
+	return _waves
+
+
 func increment_score(v:int) -> void:
 	if GameManager.god_mode():
 		used_cheats()
-
 
 	_score += v
 	if !_used_cheat and _high_score < _score:
@@ -57,5 +66,6 @@ func get_high_score_formatted() -> String:
 
 func reset_score() -> void:
 	_score = 0
+	_waves = 1
 	_used_cheat = false
 	SignalManager.on_score_updated.emit(_score)

@@ -6,7 +6,7 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	timer.wait_time = GameData.SHIELD_LIFE
+	timer.wait_time = GameData.SHIELD_DURATION
 	timer.start()
 
 
@@ -35,7 +35,6 @@ func _on_area_entered(area):
 		damage = area.get_bullet_damage()
 
 	health_bar.take_damage(damage)
-
 
 
 func _on_health_bar_died():

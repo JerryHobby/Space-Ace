@@ -1,7 +1,7 @@
 extends Area2D
 
 const ROTATION_SPEED:float = 200.0
-const SPEED:float = 50.0
+const SPEED:float = 100.0
 
 var _player_ref:Player
 
@@ -37,7 +37,7 @@ func turn(delta) -> void:
 
 func blow_up() -> void:
 	ObjectMaker.create_explosion(global_position, get_tree().current_scene)
-	ScoreManager.increment_score(GameData.SCORE_MISSILE)
+	#ScoreManager.increment_score(GameData.SCORE_MISSILE)
 	set_process(false)
 	queue_free()
 

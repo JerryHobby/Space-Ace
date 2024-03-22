@@ -6,8 +6,6 @@ extends PathFollow2D
 @export var bullet_damage: int = 10
 @export var bullet_speed: float = 170.0
 @export var bullet_direction: Vector2 = Vector2.DOWN
-@export var bullet_wait_time: float = 3.0
-@export var bullet_wait_time_var: float = 0.05
 @export var gun_offset:float = 40
 @export var waves = 4
 
@@ -17,12 +15,16 @@ const BOOM_DELAY:float = 0.1
 @onready var laser_timer = $LaserTimer
 @onready var booms = $Booms
 @onready var health_bar = $HealthBar
-
+@onready var sound = $Sound
 
 var _player_ref:Player
 var _speed:float = 0.0
 var _dead:bool = false
 var _anim_string:String
+
+var _bullet_wait_time: float = 3.5
+var _bullet_wait_time_var: float = 0.05
+
 
 func _ready():
 	_player_ref = get_tree().get_first_node_in_group(GameData.GROUP_PLAYER)
@@ -31,9 +33,11 @@ func _ready():
 	animated_sprite_2d.play(_anim_string)
 
 
-func setup(speed:float, anim_name:String) -> void:
+func setup(speed:float, anim_name:String, bullet_wait_time:float) -> void:
 	_speed = speed
 	_anim_string = anim_name
+	_bullet_wait_time = bullet_wait_time
+	_bullet_wait_time_var = bullet_wait_time * 0.20
 
 
 func _process(delta):
@@ -45,8 +49,8 @@ func _process(delta):
 func start_shoot_timer() -> void:
 	Utils.set_and_start_time(
 		laser_timer, 
-		bullet_wait_time, 
-		bullet_wait_time_var )
+		_bullet_wait_time, 
+		_bullet_wait_time_var )
 
 
 
@@ -65,7 +69,7 @@ func shoot() -> void:
 	net_position.y += gun_offset * bullet_direction.y
 	
 	update_bullet_direction()
-
+	SoundManager.play_laser_random(sound)
 	bullet.setup(
 		net_position,
 		bullet_direction,
@@ -107,6 +111,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_area_2d_area_entered(_area):
 	health_bar.take_damage(20)
+	ScoreManager.increment_score(1)
 
 
 func _on_health_bar_died():

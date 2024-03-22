@@ -30,7 +30,7 @@ func _process(delta):
 
 func _on_area_2d_area_entered(_area):
 	health_bar.take_damage(10) # Replace with function body.
-
+	ScoreManager.increment_score(1)
 
 func update_shots_fired() -> void:
 	_shots_fired += 1

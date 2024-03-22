@@ -69,7 +69,7 @@ func _on_play_button_pressed():
 
 
 func _on_exit_button_pressed():
-	pass # Replace with function body.
+	get_tree().quit()
 
 
 func _on_play_button_mouse_entered():

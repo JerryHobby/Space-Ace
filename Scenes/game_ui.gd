@@ -21,7 +21,7 @@ func god_mode() -> void:
 
 
 func on_score_updated(v:int) -> void:
-	score_label.text = ScoreManager.get_score_formatted()
+	score_label.text = "Wave: %s  /  %s" % [ScoreManager.get_waves(), ScoreManager.get_score_formatted()]
 
 
 func on_player_hit(v:int) -> void:
@@ -34,4 +34,5 @@ func on_health_bonus(v:int) -> void:
 
 func _on_health_bar_died():
 	SignalManager.on_player_died.emit()
-	GameManager.load_main_scene()
+	await get_tree().create_timer(2).timeout
+	GameManager.load_gameover_scene()

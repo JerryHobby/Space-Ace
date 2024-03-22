@@ -38,7 +38,6 @@ func spawn_asteroid() -> void:
 		asteroid.hide_health()
 		Utils.set_and_start_time(timer, 10, 0)
 	else:
-		_wait_time -= GameData.ACCELERATOR
 		Utils.set_and_start_time(timer, WAIT_TIME, WAIT_VAR)
 
 

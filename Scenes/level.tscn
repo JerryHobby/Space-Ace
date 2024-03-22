@@ -20,6 +20,7 @@ scale = Vector2(1.5, 1.5)
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_nje8h")
+volume_db = -6.0
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 

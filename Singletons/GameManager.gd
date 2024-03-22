@@ -2,15 +2,18 @@ extends Node
 
 const level_scene:PackedScene = preload("res://Scenes/level.tscn")
 const main_scene:PackedScene = preload("res://Scenes/main.tscn")
+const gameover_scene:PackedScene = preload("res://Scenes/game_over.tscn")
 
-var _music = false
-var _sounds = false
+var _music = true
+var _sounds = true
 var _god_mode = false
 
 
 func load_main_scene() -> void:
 	get_tree().change_scene_to_packed(main_scene)
 
+func load_gameover_scene() -> void:
+	get_tree().change_scene_to_packed(gameover_scene)
 
 func load_level_scene() -> void:
 	get_tree().change_scene_to_packed(level_scene)

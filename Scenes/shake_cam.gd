@@ -27,6 +27,9 @@ func get_random_shake() -> float:
 	
 
 func on_player_hit(_v:int) -> void:
+	if GameManager.god_mode():
+		return
+
 	set_process(true)
 	timer.start()
 	

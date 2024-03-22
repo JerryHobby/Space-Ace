@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WaveResource" load_steps=2 format=3 uid="uid://bhc7l8g6n3mj"]
+
+[ext_resource type="Script" path="res://Resources/Waves/wave_resource.gd" id="1_t12xp"]
+
+[resource]
+script = ExtResource("1_t12xp")
+enemy_type = 2
+gap = 2.0
+speed = 0.15
+min = 2
+max = 10
+bullet_wait_time = 3.5

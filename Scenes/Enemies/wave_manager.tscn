@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bypyjigiqrbnq"]
+[gd_scene load_steps=9 format=3 uid="uid://bypyjigiqrbnq"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/wave_manager.gd" id="1_rqqlp"]
 
@@ -27,6 +27,18 @@ _data = {
 point_count = 6
 
 [sub_resource type="Curve2D" id="Curve2D_4miw7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -87, 123, 100, 0.561948, -100, -0.561948, 1440, 124)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_swjpm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -87, 123, 100, 0.561948, -100, -0.561948, 1440, 124)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_o3347"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -87, 123, 100, 0.561948, -100, -0.561948, 1440, 124)
 }
@@ -64,6 +76,14 @@ curve = SubResource("Curve2D_vc3qp")
 [node name="Path2D2" type="Path2D" parent="Paths/Bombers"]
 position = Vector2(30, 30)
 curve = SubResource("Curve2D_4miw7")
+
+[node name="Path2D3" type="Path2D" parent="Paths/Bombers"]
+position = Vector2(30, 153)
+curve = SubResource("Curve2D_swjpm")
+
+[node name="Path2D4" type="Path2D" parent="Paths/Bombers"]
+position = Vector2(30, 273)
+curve = SubResource("Curve2D_o3347")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 12.0
